@@ -44,14 +44,41 @@
             
             <div class="page">                                                  <!-- Contenido de la Ventana de inicio -->
                 <p>MexValia</p>
-                <button type="button" onclick="moverVentana1()">Conectarse</button>
+                <button type="button" onclick="moverLogin()">Login</button><br>
+                <button type="button" onclick="moverVentana1()">Entrar sin conectarse</button><br>
+                <button type="button" onclick="moverCrearCuenta()">Crear Cuenta</button>
+            </div>
+        </div>
+<!--*************************************************************************************************************************-->
+        <div class="page leftTotal" id="crearCuenta">
+            <p>Login</p>
+            <form method="post" action="http://chobe.com.mx/www/php/crearCuenta.php">
+                    <p>Cuenta <input type="text" name="cuenta"></p>
+                    <p>Contra <input type="password" name="contra1"></p>
+                    <p>Nuevamente Contra <input type="password" name="contra2"></p>
+                    <p>Correo <input type="text" name="correo"></p>
+                    <p>Direccion <input type="text" name="direccion"></p>
+                    <p>Edad <input type="text" name="edad"></p>
+                    <p>Sexo <input type="text" name="sexo"></p>       
+                    <input type="submit" name="aceptar">
+            </form>
+        </div>
+<!--*************************************************************************************************************************-->
+        <div class="page leftTotal" id="logins">
+            <p>Login</p>
+            <div>
+                Usuario<input type="text" id="cuentaLogin"><br>
+                Contraseña <input type="password" id="contraLogin"><br>
+                <button onclick="showUser()">Aceptar</button>
+            </div>
+            <div id="txtHint">
             </div>
         </div>
 <!--*************************************************************************************************************************-->
         <div class="page leftTotal" id="ventana1">                              <!-- Ventana numero 1 -->
                 <div  class="menu" id="menu">                                   <!-- Se instancia el menu en la ventana 1 -->
                     <p id="hola">Hola MexValia</p>
-                    <button type="button" onclick="moverAtras()">antras</button>
+                    <!--<button type="button" onclick="moverAtras()">antras</button>-->
                     <button type="button" onclick="moverInicio()">inicio</button>
                     <button type="button" onclick="moverVentana('ventana1')">ventana1</button>
                     <button type="button" onclick="moverVentana('ventana2')">ventana2</button>

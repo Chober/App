@@ -58,6 +58,7 @@ function moverVentana(ventana){ // Funcion Generica para movernos desde cualquie
     transicionVentanas(actual, nueva); //Hacemos la transicion de ventanas de la actual a la target
     nueva.insertBefore(menu, nueva.childNodes[0]); //Insertamos el menu como primer elemento de nuestra ventana target
 }
+
  function moverVentanaProductos (ventana) {// Funcion para movernos desde cualquier ventana a productos es necesaria para cargar los productos
      moverVentana(ventana); //Llamamos a la funcion generica de cambio de ventana
      obtenerProductos(); //Imprimimos los productos obtenidos por la base de datos*********Modificacion para usar filtros a la hora de buscar productos
@@ -79,15 +80,25 @@ function moverProducto(elemento){//Funcion para irnos a la ventana del producto 
     var imagen = document.getElementById("imgProducto"); //Creamos una variable con el nombre imagen y la igualamos al elemento imgProducto
     var txtProducto = document.getElementById("txtProducto");//Creamos una variable con el nombre txtProducto y la igualamos al elemento txtProducto
     moverVentana("VentanaProducto");//Llamamos a la funcion generica de cambio de ventana
-    
     imagen.src = elemento.parentElement.childNodes[0].src;//Al elemento imagen le modificamos la fuente y la igualamos al elemento 0 del nodo padre
     txtProducto.innerHTML = elemento.parentElement.childNodes[1].innerHTML;//Al elemento txtProducto le modificamos el texto por el del elemento 0 del nodo padre 
     //Lo hacemos de esta forma para que en la funcion mandemos this como parametro asi no importa si clickeamos la imagen o el texto 
-}   
+}
+
+function moverLogin(){
+    nueva = document.getElementById("logins");
+    transicionVentanas(inicio, nueva);
+}
+function moverCrearCuenta(){
+    nueva = document.getElementById("crearCuenta");
+    transicionVentanas(inicio, nueva);
+}
+
 function moverAtras(){ //Funcion para regresar entre capas*****************************Bugs 
     transicionVentanas(nueva, actual);
     actual.insertBefore(menu, actual.childNodes[0]);
 }
+
 function transicionVentanas(anterior, siguiente){//Funcion Generica para hacer transicion entre ventanas pidiendo la ventana actual y la target
     anterior.classList.add("leftTotal");//A la ventana anterior le agregamos la clase leftTotal para sacarla de la webview
     siguiente.classList.remove("leftTotal");//A la ventana siguiente le quitamos la clase leftTotal para que quede dentro de la webview
@@ -144,5 +155,27 @@ function agregar(){
 
     moverVentana("carrito");
 }
+
+function showUser() {
+        document.getElementById("txtHint").innerHTML = "";
+        cuenta = document.getElementById("cuentaLogin").value;
+        contra = document.getElementById("contraLogin").value;
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            var xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if(xmlhttp.readyState === XMLHttpRequest.DONE && xmlhttp.status === 200)
+            {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+        };
+        var link ="http://chobe.com.mx/www/php/ListenPost.php?cuenta="+cuenta+"&contra="+contra;
+        xmlhttp.open("GET",link,true);
+        xmlhttp.send();
+    }
 
 
